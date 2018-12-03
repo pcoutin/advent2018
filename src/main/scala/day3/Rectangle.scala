@@ -1,0 +1,1 @@
+case class Rectangle(x: Int, y: Int, w: Int, h: Int)
