@@ -70,11 +70,13 @@ object SleepyGuard extends App {
         println(s"guard $maxSleepGuard slept $maxSecsSlept")
         (maxSleepGuard, maxSecsSlept)
     }
+
     def minuteOfDate(t : LocalDateTime) : Int = {
         t.getHour() * 60 + t.getMinute()
     }
+
     def getGuardSleepiestMinute(guardId: Int) : (Int, Int) = {
-        // Only the minutes from 00:00 - 00:59 matter, but this count
+        // Only the minutes from 00:00 - 00:59 matter, but this counts
         // all minutes of the day..
         val dayMins = new Array[Int](24*60)
         var currentGuard:Int = -1
