@@ -1,3 +1,9 @@
+/*
+ * needs enlarged stack size
+ * export SBT_OPTS="-Xss16M"
+ * set SBT_OPTS=-Xss16M
+ */
+
 import scala.io.Source
 
 object React extends App {
@@ -12,9 +18,22 @@ object React extends App {
         case x :: Nil => List(x)
         case x :: xs => {
             val rest = react(xs)
-            if (x.switchCase == rest.head) rest.tail else x :: rest
+            if (rest != Nil && x.switchCase == rest.head) {
+                rest.tail
+            } else {
+                x :: rest
+            }
         }
         case Nil => Nil
     }
-    println(react(protein))
+
+    val part1 = react(protein).length
+    println(s"part1=$part1")
+
+    val letters = protein.map(_.toLower).toSet
+    def reactExChar(c: Char) = react(protein.filter(_.toLower != c)).length
+    val part2 = letters
+        .map(reactExChar)
+        .reduceLeft((a, b) => if (a < b) a else b)
+    println(s"part2=$part2")
 }
