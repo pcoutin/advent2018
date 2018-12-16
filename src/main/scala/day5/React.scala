@@ -37,3 +37,4 @@ object React extends App {
         .reduceLeft((a, b) => if (a < b) a else b)
     println(s"part2=$part2")
 }
+React.main(Array[String]())
